@@ -10,12 +10,17 @@ import App from "./App";
 //   worker.start();
 // }
 
-if (typeof window !== "undefined") {
+// if (typeof window !== "undefined") {
+//   import("./mocks/browser").then(({ worker }) => {
+//     worker.start();
+//   });
+// }
+
+if (import.meta.env.DEV) {
   import("./mocks/browser").then(({ worker }) => {
     worker.start();
   });
 }
-
 
 const queryClient = new QueryClient();
 
