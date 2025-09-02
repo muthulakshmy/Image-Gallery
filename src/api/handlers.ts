@@ -9,7 +9,6 @@ export type ImageMeta = {
   alt: string;
 };
 
-// Seed images
 let images: ImageMeta[] = Array.from({ length: 28 }).map((_, i) => {
   const id = `seed-${i + 1}`;
   return {

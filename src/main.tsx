@@ -6,9 +6,16 @@ import App from "./App";
 import { worker } from "./api/worker";
 
 // Start MSW in development
-if (process.env.NODE_ENV === "development") {
-  worker.start();
+// if (process.env.NODE_ENV === "development") {
+//   worker.start();
+// }
+
+if (typeof window !== "undefined") {
+  import("./mocks/browser").then(({ worker }) => {
+    worker.start();
+  });
 }
+
 
 const queryClient = new QueryClient();
 
