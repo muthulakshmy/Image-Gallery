@@ -20,12 +20,8 @@ let images: ImageMeta[] = Array.from({ length: 28 }).map((_, i) => {
   };
 });
 
-const baseUrl = import.meta.env.DEV
-  ? "/api" // in dev → intercepted by MSW
-  : "https://image-gallery-19jyff1ws-muthulakshmys-projects.vercel.app/api"; 
-
 export const handlers = [
-  http.get(`${baseUrl}/images`, async () => {
+  http.get("/api/images", async () => {
     await delay(300);
     return HttpResponse.json(images, { status: 200 });
   }),
