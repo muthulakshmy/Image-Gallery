@@ -4,10 +4,14 @@ import CarouselViewer from "../components/carousel-viewer";
 import type { ImageMeta } from "../api/handlers";
 
 export default function CarouselPage() {
+
+  const baseUrl = import.meta.env.DEV
+  ? "/api" // in dev → intercepted by MSW
+  : "https://image-gallery-19jyff1ws-muthulakshmys-projects.vercel.app/api"; 
   const { data = [], isLoading } = useQuery<ImageMeta[]>({
     queryKey: ["images"],
     queryFn: async () => {
-      const res = await fetch("/api/images");
+      const res = await fetch(`${baseUrl}/images`);
       if (!res.ok) throw new Error("Failed to load");
       return res.json();
     },
